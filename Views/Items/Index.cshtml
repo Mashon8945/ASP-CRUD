@@ -9,6 +9,8 @@
         <tr>
             <th>Name</th>
             <th>Price</th>
+            <th>Serial Number</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -17,9 +19,10 @@
             <tr>
                 <td>@item.Name</td>
                 <td>$ @item.Price.ToString("N2")</td>
+                <td>@item.SerialNumber?.Name</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" >Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" >Delete</a> 
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id" >Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" >Delete</a> 
                 </td>
             </tr>
         }

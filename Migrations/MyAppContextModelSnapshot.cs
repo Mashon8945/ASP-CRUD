@@ -21,11 +21,7 @@ namespace WebApplication1.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
-            modelBuilder.Entity("WebApplication1.Models.Item", b =>
-=======
             modelBuilder.Entity("WebApplication1.Models.Category", b =>
->>>>>>> ae2f611 (One to one relationship)
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,14 +33,6 @@ namespace WebApplication1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Items");
-=======
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -70,7 +58,7 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -80,7 +68,7 @@ namespace WebApplication1.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("SerialNumberID")
+                    b.Property<int?>("SerialNumberId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -93,10 +81,9 @@ namespace WebApplication1.Migrations
                         new
                         {
                             Id = 5,
-                            CategoryId = 0,
                             Name = "Microphone",
                             Price = 75.0,
-                            SerialNumberID = 10
+                            SerialNumberId = 10
                         });
                 });
 
@@ -136,9 +123,7 @@ namespace WebApplication1.Migrations
                 {
                     b.HasOne("WebApplication1.Models.Category", "Category")
                         .WithMany("Items")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });
@@ -160,7 +145,6 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.Item", b =>
                 {
                     b.Navigation("SerialNumber");
->>>>>>> ae2f611 (One to one relationship)
                 });
 #pragma warning restore 612, 618
         }

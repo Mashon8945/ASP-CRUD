@@ -10,6 +10,8 @@
             <th>Name</th>
             <th>Price</th>
             <th>Serial Number</th>
+            <th>Category</th>
+            <th>Clients</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -20,6 +22,16 @@
                 <td>@item.Name</td>
                 <td>$ @item.Price.ToString("N2")</td>
                 <td>@item.SerialNumber?.Name</td>
+                <td>@item.Category?.Name</td>
+                <td>
+                    @if (item.ItemClients != null)
+                    {
+                        foreach (var client in item.ItemClients)
+                        {
+                            @client.Client.Name;
+                        }
+                    }
+                </td>
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id" >Edit</a>
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" >Delete</a> 

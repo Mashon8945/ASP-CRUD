@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -10,9 +11,11 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(MyAppContext))]
-    partial class MyAppContextModelSnapshot : ModelSnapshot
+    [Migration("20250304170438_manyToMany")]
+    partial class manyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,11 +115,16 @@ namespace WebApplication1.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ClientId1")
+                        .HasColumnType("int");
+
                     b.HasKey("ItemId", "ClientId");
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ItemClients");
+                    b.HasIndex("ClientId1");
+
+                    b.ToTable("itemClients");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.SerialNumber", b =>
@@ -162,15 +170,15 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.ItemClient", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Client", "Client")
+                    b.HasOne("WebApplication1.Models.Item", "Item")
                         .WithMany("ItemClients")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication1.Models.Item", "Item")
+                    b.HasOne("WebApplication1.Models.Client", "Client")
                         .WithMany("ItemClients")
-                        .HasForeignKey("ItemId")
+                        .HasForeignKey("ClientId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

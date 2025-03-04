@@ -15,5 +15,7 @@ namespace WebApplication1.Models
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
 
+        public List<ItemClient>? ItemClients { get; set; }
+
     }
 }
